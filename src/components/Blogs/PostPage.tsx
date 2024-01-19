@@ -82,8 +82,7 @@ export const PostPage = () => {
   };
 
   const handleDelete = () => {
-    selectedPost &&
-      dispatch(deletePost({ id: selectedPost.id, type: postType }));
+    selectedPost && dispatch(deletePost(selectedPost.id));
     navigate(`/blogs/${postType}`);
   };
 
