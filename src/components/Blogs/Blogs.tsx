@@ -1,5 +1,4 @@
 import { Layout, Pagination } from "antd";
-import { Footer } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BORDER_RADIUS, COLORS, PAGE_SIZE } from "../../constants";
@@ -34,7 +33,8 @@ const footerStyle: React.CSSProperties = {
   borderBottomLeftRadius: BORDER_RADIUS,
 };
 
-const { Content } = Layout;
+const { Content, Footer } = Layout;
+
 export const Blogs = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

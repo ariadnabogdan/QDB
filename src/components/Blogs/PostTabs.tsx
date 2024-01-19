@@ -27,7 +27,7 @@ const items: TabsProps["items"] = [
 ];
 
 const tabsStyle: React.CSSProperties = {
-  padding: PADDING,
+  paddingLeft: PADDING,
   backgroundColor: COLORS.WHITE,
   borderTopRightRadius: BORDER_RADIUS,
   borderTopLeftRadius: BORDER_RADIUS,

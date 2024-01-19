@@ -22,6 +22,12 @@ yarn
 yarn start
 ```
 
+4. Run the tests
+
+```sh
+yarn test
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

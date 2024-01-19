@@ -1,5 +1,4 @@
 import { List, Typography } from "antd";
-import Link from "antd/es/typography/Link";
 import React from "react";
 import styled from "styled-components";
 import { BlogPost } from "../../redux/posts/postsSlice";
@@ -25,7 +24,7 @@ const DescriptionContainer = styled.div`
   justify-content: space-between;
 `;
 
-const { Text } = Typography;
+const { Text, Link } = Typography;
 
 interface Props {
   displayedPosts: BlogPost[];
@@ -49,7 +48,7 @@ export const PostsList = (props: Props) => {
           }}
         >
           <List.Item.Meta
-            avatar={<img width={200} height={150} alt="logo" src={item.img} />}
+            avatar={<img width={180} height={120} alt="logo" src={item.img} />}
             title={
               <TitleContainer>
                 <Typography>{item.title}</Typography>
