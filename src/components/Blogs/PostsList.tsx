@@ -1,6 +1,7 @@
 import { List, Typography } from "antd";
 import Link from "antd/es/typography/Link";
 import React from "react";
+import styled from "styled-components";
 import { BlogPost } from "../../redux/posts/postsSlice";
 
 const listStyle: React.CSSProperties = {
@@ -11,6 +12,20 @@ const listStyle: React.CSSProperties = {
 const listItemStyle: React.CSSProperties = {
   cursor: "pointer",
 };
+
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const DescriptionContainer = styled.div`
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const { Text } = Typography;
 
 interface Props {
   displayedPosts: BlogPost[];
@@ -29,20 +44,25 @@ export const PostsList = (props: Props) => {
         <List.Item
           key={item.title}
           style={listItemStyle}
-          extra={
-            <img
-              width={200}
-              alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-            />
-          }
-          actions={[<Link>Read more</Link>]}
           onClick={() => {
             handleClick(item.id);
           }}
         >
-          <List.Item.Meta title={<Typography>{item.title}</Typography>} />
-          {item.body}
+          <List.Item.Meta
+            avatar={<img width={200} height={150} alt="logo" src={item.img} />}
+            title={
+              <TitleContainer>
+                <Typography>{item.title}</Typography>
+                <Text type="secondary">{item.date}</Text>
+              </TitleContainer>
+            }
+            description={
+              <DescriptionContainer>
+                {item.body}
+                <Link>Read more</Link>
+              </DescriptionContainer>
+            }
+          />
         </List.Item>
       )}
     />

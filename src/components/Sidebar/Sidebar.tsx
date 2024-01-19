@@ -62,7 +62,8 @@ export const Sidebar = (props: Props) => {
           <Image
             style={{ borderRadius: "50%" }}
             width={100}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            src="/userPicture.jpeg"
+            preview={false}
           />
           <Text type="secondary">Hello</Text>
           {!isLoading && <UserDetails user={user} isCollapsed={collapsed} />}

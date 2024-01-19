@@ -2,7 +2,7 @@ import { Layout, Pagination } from "antd";
 import { Footer } from "antd/es/layout/layout";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { PAGE_SIZE } from "../../constants";
+import { BORDER_RADIUS, COLORS, PAGE_SIZE } from "../../constants";
 import {
   BlogPost,
   fetchPosts,
@@ -12,6 +12,7 @@ import {
   setPostType,
 } from "../../redux/posts/postsSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { BlogsHeader } from "./BlogsHeader";
 import { PostsList } from "./PostsList";
 import { PostTabs } from "./PostTabs";
 
@@ -28,7 +29,9 @@ const contentStyle: React.CSSProperties = {
 const footerStyle: React.CSSProperties = {
   display: "flex",
   justifyContent: "center",
-  backgroundColor: "white",
+  backgroundColor: COLORS.WHITE,
+  borderBottomRightRadius: BORDER_RADIUS,
+  borderBottomLeftRadius: BORDER_RADIUS,
 };
 
 const { Content } = Layout;
@@ -61,7 +64,7 @@ export const Blogs = () => {
       setPostsToDisplay(postsList);
 
       if (postsList.length >= PAGE_SIZE) {
-        setDisplayedPosts(postsList.slice(0, 4));
+        setDisplayedPosts(postsList.slice(0, 3));
       } else {
         setDisplayedPosts(postsList);
       }
@@ -84,6 +87,7 @@ export const Blogs = () => {
   return (
     <Layout style={layoutStyle}>
       <Content style={contentStyle}>
+        <BlogsHeader />
         <PostTabs />
         <PostsList displayedPosts={displayedPosts} handleClick={handleClick} />
         <Footer style={footerStyle}>

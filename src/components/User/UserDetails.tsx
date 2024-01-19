@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Popover, Layout } from "antd";
+import { Dropdown, MenuProps, Space } from "antd";
 import { UserData } from "../../redux/user/userSlice";
 import { MailOutlined, PhoneOutlined, CrownOutlined } from "@ant-design/icons";
-import styled from "styled-components";
 import { COLORS } from "../../constants";
 import { CaretDownOutlined } from "@ant-design/icons";
 
@@ -11,55 +10,36 @@ interface Props {
   isCollapsed: boolean;
 }
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const Information = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
-const contentStyle: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
-};
-
-const { Content } = Layout;
-
 export const UserDetails = (props: Props) => {
   const { user, isCollapsed } = props;
-  const color = COLORS.BLUE;
 
-  const content = (
-    <Container>
-      <Information>
-        <PhoneOutlined style={{ color }} /> {user.phone}
-      </Information>
-      <Information>
-        <MailOutlined style={{ color }} /> {user.email}
-      </Information>
-      <Information>
-        <CrownOutlined style={{ color }} /> {user.company.name}
-      </Information>
-    </Container>
-  );
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: user.phone,
+      icon: <PhoneOutlined />,
+    },
+    {
+      key: "2",
+      label: user.email,
+      icon: <MailOutlined />,
+    },
+    {
+      key: "3",
+      label: user.company.name,
+      icon: <CrownOutlined />,
+    },
+  ];
 
   return (
-    <Content style={contentStyle}>
-      <Popover
-        content={content}
-        title={user.name}
-        trigger="hover"
-        placement={isCollapsed ? "right" : "bottom"}
-      >
-        <Button icon={<CaretDownOutlined />} type="text">
-          {user.name}
-        </Button>
-      </Popover>
-    </Content>
+    <Dropdown
+      menu={{ items }}
+      placement={isCollapsed ? "bottomRight" : "bottom"}
+    >
+      <Space>
+        {user.name}
+        <CaretDownOutlined style={{ color: COLORS.GREY }} />
+      </Space>
+    </Dropdown>
   );
 };

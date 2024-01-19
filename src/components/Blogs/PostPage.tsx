@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Layout } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
-
-import { Header } from "antd/es/layout/layout";
 import { Typography } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
@@ -15,13 +13,8 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { EditPostForm } from "./EditPostForm";
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 const { Footer, Content } = Layout;
-
-const headerStyle: React.CSSProperties = {
-  lineHeight: "64px",
-  backgroundColor: "#d6e4ff",
-};
 
 const contentStyle: React.CSSProperties = {
   minHeight: 120,
@@ -88,11 +81,10 @@ export const PostPage = () => {
 
   return (
     <Layout style={layoutStyle}>
-      <Header style={headerStyle}>
-        <Text strong>Post {selectedPost?.id}</Text>
-      </Header>
       <Content style={contentStyle}>
-        <Text strong> {selectedPost?.title}</Text>
+        <Text type="secondary"> {selectedPost?.date}</Text>
+        <Title level={3}> {selectedPost?.title}</Title>
+        <img width={400} height={300} alt="logo" src={selectedPost?.img} />
         <span>{selectedPost?.body}</span>
       </Content>
       <Footer style={footerStyle}>

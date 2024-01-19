@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import type { TabsProps } from "antd";
-import { COLORS, ROUTES, SIDEBAR_MENU } from "../../constants";
+import {
+  BORDER_RADIUS,
+  COLORS,
+  PADDING,
+  ROUTES,
+  SIDEBAR_MENU,
+} from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
 import { PostType } from "../../redux/posts/postsSlice";
 
@@ -21,8 +27,10 @@ const items: TabsProps["items"] = [
 ];
 
 const tabsStyle: React.CSSProperties = {
-  padding: "10px",
+  padding: PADDING,
   backgroundColor: COLORS.WHITE,
+  borderTopRightRadius: BORDER_RADIUS,
+  borderTopLeftRadius: BORDER_RADIUS,
 };
 
 export const PostTabs = () => {

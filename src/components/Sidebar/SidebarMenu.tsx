@@ -83,6 +83,7 @@ export const SidebarMenu = (props: Props) => {
       items={sideBarMenuItems}
       selectedKeys={[menuKey]}
       subMenuOpenDelay={2}
+      expandIcon=" "
     />
   );
 };

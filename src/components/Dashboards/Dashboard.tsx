@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Card, Col, Row, Statistic } from "antd";
 import { COLORS, SIDEBAR_MENU } from "../../constants";
-import { fetchPosts } from "../../redux/posts/postsSlice";
+import { fetchPosts, setMenuKey } from "../../redux/posts/postsSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 
 export const Dashboard = () => {
@@ -19,21 +19,25 @@ export const Dashboard = () => {
     if (posts.all.length === 0 && user.id) dispatch(fetchPosts(user.id));
   }, [user]);
 
+  useEffect(() => {
+    dispatch(setMenuKey("/dashboard"));
+  }, []);
+
   const color = COLORS.BLUE;
 
   const items = [
     {
-      title: SIDEBAR_MENU.BLOGS.ALL,
+      title: `${SIDEBAR_MENU.BLOGS.ALL} posts`,
       value: posts.all.length,
       icon: <MessageOutlined />,
     },
     {
-      title: SIDEBAR_MENU.BLOGS.LATEST,
+      title: `${SIDEBAR_MENU.BLOGS.LATEST} posts`,
       value: posts.latest.length,
       icon: <InfoCircleOutlined />,
     },
     {
-      title: SIDEBAR_MENU.BLOGS.LATEST,
+      title: `${SIDEBAR_MENU.BLOGS.ARCHIVED} posts`,
       value: posts.archived.length,
       icon: <CalendarOutlined />,
     },

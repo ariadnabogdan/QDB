@@ -14,6 +14,7 @@ import {
   AppstoreAddOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
+import { UserMenu } from "./UserMenu";
 
 const { Header } = Layout;
 
@@ -42,7 +43,7 @@ export const AppHeader = () => {
         disabled
       />
       <ActionMenu>
-        <Button type="text" icon={<PlusOutlined />}>
+        <Button type="text" icon={<PlusOutlined />} disabled>
           {ADD}
         </Button>
         <Badge dot={true}>
@@ -54,6 +55,7 @@ export const AppHeader = () => {
         <Badge dot={true}>
           <AppstoreAddOutlined style={{ fontSize: "17px" }} />
         </Badge>
+        <UserMenu />
       </ActionMenu>
     </Header>
   );

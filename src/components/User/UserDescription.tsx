@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Descriptions } from "antd";
-import { useAppSelector } from "../../redux/store";
+import { useAppDispatch, useAppSelector } from "../../redux/store";
+import { setMenuKey } from "../../redux/posts/postsSlice";
 
 export const UserDescription = () => {
+  const dispatch = useAppDispatch();
   const { user, isLoading } = useAppSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    dispatch(setMenuKey(""));
+  }, []);
 
   return (
     <>

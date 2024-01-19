@@ -1,10 +1,13 @@
 export const COLORS = {
   WHITE: "#FFFFFF",
   BLUE: "#1677ff",
+  GREY: "#B8B8B8",
 };
 
 export const PADDING = "25px";
 export const HEADER_HEIGHT = "64px";
+export const BORDER_RADIUS = "20px";
+
 export const SIDEBAR_WIDTH = {
   EXPANDED: "20%",
   COLLAPSED: "12%",
@@ -13,7 +16,7 @@ export const SIDEBAR_WIDTH = {
 export const SEARCH_PLACEHOLDER = "Type here to search...";
 export const LIVE_METRICS = "Live metrics";
 export const ADD = "Add";
-export const PAGE_SIZE = 4;
+export const PAGE_SIZE = 3;
 
 export const ROUTES = {
   HOME: "/",
@@ -77,3 +80,20 @@ export const MODAL = {
   },
   FORM_PLACEHOLDER: "Type here...",
 };
+
+export const USER_MENU = {
+  ACCOUNT: "Account",
+  LOG_OUT: "Log out",
+};
+
+export const COMPANY = "Qatar Development Bank";
+
+export const BLOGS_HEADER = {
+  all: "All Blog Posts",
+  latest: "Latest Blog Posts",
+  archived: "Archived Blog Posts",
+};
+
+export const SORT = "Filter/Sort by";
+export const DATE = "Date";
+export const RELEVANCE = "Relevance";

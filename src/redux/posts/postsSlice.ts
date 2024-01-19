@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import moment from "moment";
+
+const today = moment().format("ll");
 
 export type PostType = "all" | "latest" | "archived";
 export interface BlogPost {
@@ -8,6 +11,8 @@ export interface BlogPost {
   title: string;
   body: string;
   type?: PostType;
+  date?: string;
+  img?: string;
 }
 
 interface AllPosts {
@@ -117,7 +122,12 @@ export const postsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      const posts = action.payload;
+      const fetchedPosts = action.payload;
+      const posts = fetchedPosts.map((post: BlogPost, index: number) => ({
+        ...post,
+        date: today,
+        img: `/post${index}.jpg`,
+      }));
       posts[0] = { ...posts[0], type: "latest" };
       posts[1] = { ...posts[1], type: "archived" };
       state.posts.all = posts;
@@ -130,7 +140,9 @@ export const postsSlice = createSlice({
     });
     builder.addCase(fetchPostById.fulfilled, (state, action) => {
       const postType = action.payload?.type ?? "all";
-      state.selectedPost = action.payload?.post;
+      const post = action.payload?.post;
+      const postWithDate = post && { ...post, date: today };
+      state.selectedPost = postWithDate;
       state.postType = postType;
       state.isLoading = false;
     });
@@ -139,15 +151,17 @@ export const postsSlice = createSlice({
     });
     builder.addCase(updatePost.fulfilled, (state, action) => {
       state.isLoading = false;
-      const updatedBlogIndex = state.posts.all.findIndex(
+      const updatedPostIndex = state.posts.all.findIndex(
         (post) => post.id === action.payload.id
       );
       const updatedPosts = state.posts.all;
-      updatedPosts[updatedBlogIndex] = action.payload;
+      updatedPosts[updatedPostIndex] = action.payload;
       state.posts.all = updatedPosts;
       state.selectedPost = action.payload;
-      state.posts.latest = [updatedPosts[0]];
-      state.posts.archived = [updatedPosts[1]];
+      const postType = updatedPosts[updatedPostIndex].type;
+      if (postType) {
+        state.posts[postType] = [{ ...action.payload, type: postType }];
+      }
     });
     builder.addCase(updatePost.pending, (state) => {
       state.isLoading = true;
