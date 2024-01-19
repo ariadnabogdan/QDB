@@ -6,6 +6,7 @@ import { BlogPost } from "../../redux/posts/postsSlice";
 const listStyle: React.CSSProperties = {
   height: "90%",
   backgroundColor: "white",
+  overflow: "scroll",
 };
 
 const listItemStyle: React.CSSProperties = {

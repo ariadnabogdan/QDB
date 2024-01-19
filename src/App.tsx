@@ -33,14 +33,14 @@ export const App: React.FC = () => {
   }, [collapsed]);
 
   const layoutStyle = {
-    height: "calc(100vh - 64px)",
+    height: "100%",
     marginLeft: contentMargin,
   };
 
   return (
     <Provider store={store}>
       <Flex gap="middle" wrap="wrap">
-        <Layout>
+        <Layout style={{ height: "100vh" }}>
           <Router>
             <Sidebar collapsed={collapsed} handleCollapse={handleCollapse} />
             <Layout style={layoutStyle}>

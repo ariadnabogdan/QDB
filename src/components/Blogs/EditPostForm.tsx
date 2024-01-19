@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import { MODAL } from "../../constants";
 import { BlogPost } from "../../redux/posts/postsSlice";
@@ -15,6 +15,19 @@ export const EditPostForm = (props: Props) => {
   const { isModalOpen, handleClose, handleSave, post } = props;
   const [form] = Form.useForm();
   const [updatedPost, setUpdatedPost] = useState<BlogPost>(post);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const values = Form.useWatch([], form);
+
+  useEffect(() => {
+    form.validateFields({ validateOnly: true }).then(
+      () => {
+        setIsSaveDisabled(false);
+      },
+      () => {
+        setIsSaveDisabled(true);
+      }
+    );
+  }, [values]);
 
   const handleChangeTitle = (e: any) => {
     setUpdatedPost({ ...updatedPost, title: e.target.value });
@@ -48,6 +61,7 @@ export const EditPostForm = (props: Props) => {
             key={MODAL.BUTTONS.SAVE_KEY}
             type="primary"
             onClick={handleSavePost}
+            disabled={isSaveDisabled}
           >
             {MODAL.BUTTONS.SAVE}
           </Button>,
